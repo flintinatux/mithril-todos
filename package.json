@@ -1,0 +1,20 @@
+{
+  "name": "mithril-todo",
+  "description": "Description",
+  "author": "Scott McCormack",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flintinatux/mithril-todo"
+  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "coffeeify": "^1.0.0",
+    "mithril": "^0.1.27",
+    "watchify": "^2.2.1"
+  },
+  "browserify": [
+    "coffeeify"
+  ]
+}
