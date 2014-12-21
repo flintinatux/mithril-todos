@@ -1,4 +1,6 @@
+_    = require 'lodash'
 path = require 'path'
+watchify = require 'watchify'
 
 paths =
   public: 'public'
@@ -9,6 +11,9 @@ module.exports =
   mapped:     true
   paths:      paths
   revisioned: false
+
+  browserify: _.extend {}, watchify.args,
+    debug: true
 
   less:
     paths: [ "#{paths.root}/client/common" ]

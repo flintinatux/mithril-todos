@@ -1,17 +1,18 @@
-_      = require 'lodash'
-del    = require 'del'
-gulp   = require 'gulp'
-gulpif = require 'gulp-if'
-lazy   = require 'lazypipe'
-merge  = require 'merge-stream'
-minify = require 'gulp-minify-css'
+_       = require 'lodash'
+del     = require 'del'
+gulp    = require 'gulp'
+gulpif  = require 'gulp-if'
+lazy    = require 'lazypipe'
+merge   = require 'merge-stream'
+minify  = require 'gulp-minify-css'
 replace = require 'gulp-rev-replace'
-rev    = require 'gulp-rev'
-uglify = require 'gulp-uglify'
-util   = require 'gulp-util'
+rev     = require 'gulp-rev'
+uglify  = require 'gulp-uglify'
+util    = require 'gulp-util'
 
-config = require './tasks/config'
-styles = require './tasks/styles'
+client  = require './tasks/client'
+config  = require './tasks/config'
+styles  = require './tasks/styles'
 
 ## pipes
 
@@ -29,10 +30,11 @@ revision = lazy()
 
 build = ->
   merge [
+    client.build()
     styles.build()
   ]
-  .pipe gulpif config.compress, compress()
-  .pipe gulpif config.revision, revision()
+  .pipe gulpif config.compressed, compress()
+  .pipe gulpif config.revisioned, revision()
   .pipe gulp.dest config.paths.public
 
 ## tasks
@@ -44,11 +46,12 @@ gulp.task 'build:production', ['clean'], ->
     compressed: true
     mapped:     false
     revisioned: true
+  _.extend config.browserify, debug: false
   build()
 
-gulp.task 'clean', ['clean:styles'], (done) ->
+gulp.task 'clean', ['clean:client', 'clean:styles'], (done) ->
   del [ "#{config.paths.public}/rev-manifest.json" ], done
 
 gulp.task 'default', ['watch']
 
-gulp.task 'watch', ['watch:styles']
+gulp.task 'watch', ['watch:client', 'watch:styles']

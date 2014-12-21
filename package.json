@@ -26,6 +26,7 @@
     "lodash": "^2.4.1",
     "merge-stream": "^0.1.6",
     "mithril": "^0.1.27",
+    "vinyl-transform": "^1.0.0",
     "watchify": "^2.2.1"
   },
   "devDependencies": {},
