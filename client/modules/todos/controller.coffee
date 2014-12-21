@@ -1,4 +1,4 @@
-vm = require 'client/todos/vm.coffee'
+vm = require './vm'
 
 controller = ->
   vm.init()

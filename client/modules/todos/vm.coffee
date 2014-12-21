@@ -1,6 +1,6 @@
 m     = require 'mithril'
-Todo  = require 'client/todos/model.coffee'
-Todos = require 'client/todos/collection.coffee'
+Todo  = require '../../models/todo'
+Todos = require '../../collections/todos'
 
 vm = {}
 

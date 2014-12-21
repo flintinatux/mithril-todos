@@ -1,7 +1,10 @@
+_          = require 'lodash'
 browserify = require 'browserify'
 del        = require 'del'
 gulp       = require 'gulp'
 gulpif     = require 'gulp-if'
+lazy       = require 'lazypipe'
+rename     = require 'gulp-rename'
 source     = require 'gulp-sourcemaps'
 transform  = require 'vinyl-transform'
 watchify   = require 'watchify'
@@ -11,49 +14,50 @@ config = require './config'
 
 ## files
 
-client = ['client/app.js']
+client = './client/app.coffee'
+
+## transpilers
+
+bundler = browserify(config.browserify).add client
+watcher = _.memoize ->
+  watchify bundler
+    .on 'log', util.log
+    .on 'update', watchClient
 
 ## pipes
 
 browserified = ->
-  transform (filename) ->
-    browserify config.browserify
-      .add(filename)
-      .bundle()
+  transform -> bundler.bundle()
 
-bundler = -> @bundle()
+dest = lazy().pipe gulp.dest, config.paths.public
 
-rebuild = (filename) ->
-  gulp.src filename
-    .pipe transform bundler.bind(@)
-    .pipe gulp.dest config.paths.public
+renamer = lazy().pipe rename,
+  dirname: 'assets'
+  extname: '.js'
 
 watchified = ->
-  transform (filename) ->
-    watcher = watchify browserify(config.browserify)
-    watcher.on 'log', util.log
-      .on 'update', rebuild.bind(watcher, filename)
-      .add filename
-      .bundle()
+  transform -> watcher().bundle()
 
 ## streams
 
 buildClient = ->
-  gulp.src client
-    .pipe browserified().on('error', util.log)
+  gulp.src client, base: '/'
+    .pipe browserified()
+    .pipe renamer()
 
 watchClient = ->
-  gulp.src client
-    .pipe watchified().on('error', util.log)
-    .pipe gulp.dest config.paths.public
+  gulp.src client, base: '/'
+    .pipe watchified()
+    .pipe renamer()
+    .pipe dest()
 
 ## tasks
 
 gulp.task 'build:client', ['clean:client'], ->
-  buildClient().pipe gulp.dest config.paths.public
+  buildClient().pipe dest()
 
 gulp.task 'clean:client', (done) ->
-  del [ "#{config.paths.public}/*.js" ], done
+  del [ "#{config.paths.public}/assets/app*.js" ], done
 
 gulp.task 'watch:client', ['clean:client'], watchClient
 

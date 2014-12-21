@@ -13,7 +13,8 @@ module.exports =
   revisioned: false
 
   browserify: _.extend {}, watchify.args,
-    debug: true
+    debug: true,
+    extensions: ['.coffee']
 
   less:
     paths: [ "#{paths.root}/client/common" ]

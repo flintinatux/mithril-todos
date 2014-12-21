@@ -1,5 +1,5 @@
 m  = require 'mithril'
-vm = require 'client/todos/vm.coffee'
+vm = require './vm'
 
 module.exports = ->
   m 'html', [
