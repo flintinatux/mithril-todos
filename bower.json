@@ -1,5 +1,5 @@
 {
-  "name": "mithril-todo",
+  "name": "mithril-todos",
   "version": "0.0.1",
   "authors": [
     "Scott McCormack <mccormack.scott@gmail.com>"
@@ -14,7 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "lesshat": "madebysource/lesshat",
     "normalize.css": "~3.0.2"
   }
 }
