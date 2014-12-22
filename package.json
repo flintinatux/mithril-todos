@@ -1,11 +1,11 @@
 {
-  "name": "mithril-todo",
+  "name": "mithril-todos",
   "description": "Description",
   "author": "Scott McCormack",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flintinatux/mithril-todo"
+    "url": "https://github.com/flintinatux/mithril-todos"
   },
   "scripts": {
     "build": "npm run build:scripts && npm run build:styles && npm run build:markup",
@@ -31,10 +31,11 @@
     "less": "^2.1.2",
     "lodash": "^2.4.1",
     "minifyify": "^4.4.0",
-    "mithril": "^0.1.27",
+    "mithril": "^0.1.27"
+  },
+  "devDependencies": {
     "nodemon": "^1.2.1",
     "parallelshell": "^1.0.3",
     "watchify": "^2.2.1"
-  },
-  "devDependencies": {}
+  }
 }
