@@ -1,6 +1,6 @@
 m     = require 'mithril'
-Todo  = require '../../models/todo'
-Todos = require '../../collections/todos'
+Todo  = require './model'
+Todos = require './collection'
 
 vm = {}
 
