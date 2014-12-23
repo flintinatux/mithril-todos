@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "name": "mithril-todos",
+    "script": "server/main.coffee",
+    "watch": ["server"],
+    "exec_mode": "cluster_mode",
+    "instances": 1
+  }]
+}

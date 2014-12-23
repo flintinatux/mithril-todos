@@ -1,44 +1,49 @@
 .description {
-  font-weight: normal;
+  font-weight: 300;
 
-  .complete & {
+  .done & {
     text-decoration: line-through;
   }
 }
 
-.done {
+.status {
   .fa();
-  .fa-li();
-  text-align: left;
+  left: 1.5rem;
+  position: absolute;
+  top: 1.8rem;
 
   &:before {
     content: @fa-var-square-o;
 
-    .complete & {
+    .done & {
       content: @fa-var-check-square-o;
     }
   }
 }
 
 .newTodo {
-  margin-bottom: 2.5rem;
+  margin: 0;
+  padding: 1.5rem;
+  width: 100%;
 }
 
 .title {
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .todo {
-  > label {
-    cursor: pointer;
+  cursor: pointer;
+  padding: 1.5rem 0 1.5rem 4.0rem;
+  position: relative;
 
-    .complete & {
-      color: @gray-light;
-    }
+  &:hover {
+    background: @gray-80;
   }
 }
 
 .todos {
-  .fa-ul();
-  margin-bottom: 2.5rem;
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
 }

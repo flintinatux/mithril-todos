@@ -1,6 +1,9 @@
 m  = require 'mithril'
 vm = require './vm'
 
+toggle = (model, prop) ->
+  -> model[prop] not model[prop]()
+
 module.exports = ->
   m '.container', [
     m 'h1.title', 'Todo List'
@@ -12,14 +15,12 @@ module.exports = ->
 
     m 'ul.todos', [
       vm.list.map (todo) ->
-        m 'li.todo', { class: if todo.done() then 'complete' else '' }, [
-          m 'label', [
-            m 'input[type=checkbox]',
-              onchange: m.withAttr 'checked', todo.done
-              checked:  todo.done()
-            m 'i.done'
-            m 'span.description', todo.description()
-          ]
+        m 'li.todo',
+          class: if todo.done() then 'done' else ''
+          onclick: toggle todo, 'done'
+        , [
+          m 'i.status'
+          m 'span.description', todo.description()
         ]
     ]
   ]
