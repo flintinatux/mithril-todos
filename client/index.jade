@@ -1,6 +1,11 @@
 - function rev(path) { return (locals[path] || path).substring(6); }
 
 doctype html
-title Mithril Todos
-link(href=rev('public/app.css') media='screen' rel='stylesheet')
-script(src=rev('public/app.js') type='text/javascript' defer)
+html
+  head
+    title Mithril Todos
+    if compileDebug
+      script(src='//localhost:9091' type='text/javascript' defer)
+    script(src=rev('public/app.js') type='text/javascript' defer)
+    link(href=rev('public/app.css') media='screen' rel='stylesheet')
+  body

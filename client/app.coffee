@@ -1,4 +1,4 @@
-window.m = require('mithril')
-window.todos = require('./todos')
+window.m     = require 'mithril'
+window.todos = require './todos'
 
-m.module(document, todos)
+m.module document.body, todos
