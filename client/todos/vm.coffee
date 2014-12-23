@@ -5,7 +5,12 @@ Todos = require './collection'
 vm = {}
 
 vm.init = ->
-  vm.list = new Todos()
+  vm.list = new Todos(
+    new Todo description: 'Go to the bank'
+    new Todo description: 'Walk the dog after lunch'
+    new Todo description: 'Ship all the things'
+  )
+
   vm.description = m.prop ''
 
   vm.add = (e) ->

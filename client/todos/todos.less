@@ -1,3 +1,44 @@
+.description {
+  font-weight: normal;
+
+  .complete & {
+    text-decoration: line-through;
+  }
+}
+
+.done {
+  .fa();
+  .fa-li();
+  text-align: left;
+
+  &:before {
+    content: @fa-var-square-o;
+
+    .complete & {
+      content: @fa-var-check-square-o;
+    }
+  }
+}
+
+.newTodo {
+  margin-bottom: 2.5rem;
+}
+
 .title {
   text-align: center;
+}
+
+.todo {
+  > label {
+    cursor: pointer;
+
+    .complete & {
+      color: @gray-light;
+    }
+  }
+}
+
+.todos {
+  .fa-ul();
+  margin-bottom: 2.5rem;
 }
