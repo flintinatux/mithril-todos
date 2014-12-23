@@ -1,5 +1,5 @@
 .action {
-  background: white;
+  background: fade(white, 0);
   border: none;
   bottom: 0;
   cursor: pointer;
@@ -23,7 +23,7 @@
 }
 
 .description {
-  font-weight: 300;
+  word-wrap: break-word;
 
   .done & {
     text-decoration: line-through;
@@ -37,9 +37,13 @@
   #description {
     border: none;
     margin: 0;
-    padding: 1.5rem 1.5rem 1.5rem 5.0rem;
+    padding: 1.5rem 5.0rem;
     width: 100%;
   }
+}
+
+.remove {
+  right: 0;
 }
 
 .status {
@@ -59,7 +63,7 @@
 }
 
 .title {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
   text-align: center;
   text-transform: uppercase;
 }
@@ -67,11 +71,15 @@
 .todo {
   border-bottom: 1px solid @gray-80;
   cursor: pointer;
-  padding: 1.5rem 0 1.5rem 5.0rem;
+  padding: 1.5rem 5.0rem;
   position: relative;
 
   &:hover {
     background: @gray-80;
+  }
+
+  &.done {
+    color: @gray-50;
   }
 }
 

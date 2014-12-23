@@ -37,7 +37,8 @@
     "lodash": "^2.4.1",
     "minifyify": "^4.4.0",
     "mithril": "^0.1.27",
-    "pm2": "^0.12.2"
+    "pm2": "^0.12.2",
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "browser-sync": "^1.8.2",

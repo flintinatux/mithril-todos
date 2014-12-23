@@ -1,3 +1,4 @@
+_    = require 'lodash'
 m    = require 'mithril'
 vm   = require './vm'
 util = require '../common/util'
@@ -20,19 +21,20 @@ module.exports = ->
       m "button.action.clear[type=button][title='Clear']",
         class: if vm.description() then '' else 'hidden'
         onclick: vm.clear
-      , [
-        m 'i.fa'
-      ]
+      , m.trust '&times;'
     ]
 
     m 'ul.todos', [
-      vm.list.map (todo) ->
+      vm.sortedList().map (todo) ->
         m 'li.todo',
           class: if todo.done() then 'done' else ''
           onclick: util.toggle todo, 'done'
         , [
           m 'i.status'
           m 'span.description', todo.description()
+          m 'button.action.remove[title=Remove]',
+            onclick: _.partial vm.remove, todo
+          , m.trust '&times;'
         ]
     ]
   ]
