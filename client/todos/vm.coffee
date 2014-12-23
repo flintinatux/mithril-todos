@@ -1,3 +1,4 @@
+_     = require 'lodash'
 m     = require 'mithril'
 Todo  = require './model'
 Todos = require './collection'
@@ -16,8 +17,21 @@ vm.init = ->
   vm.add = (e) ->
     e.preventDefault()
     if vm.description()
-      vm.list.push new Todo description: vm.description()
-      vm.description ''
+      vm.list.unshift new Todo description: vm.description()
+      vm.clear()
+
+  vm.allDone = ->
+    _.all vm.list, (todo) -> todo.done()
+
+  vm.clear = ->
+    vm.description ''
+    document.getElementById('description').focus()
+
+  vm.toggleAll = ->
+    done = not vm.allDone()
+    _.each vm.list, (todo) ->
+      todo.done(done)
+      true
 
   vm
 
