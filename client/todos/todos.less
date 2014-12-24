@@ -1,3 +1,12 @@
+#todos {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .action {
   background: fade(white, 0);
   border: none;
@@ -22,12 +31,21 @@
   }
 }
 
+.content {
+  flex-grow: 2;
+  overflow-y: auto;
+}
+
 .description {
   word-wrap: break-word;
 
   .done & {
     text-decoration: line-through;
   }
+}
+
+.header {
+  flex-shrink: 0;
 }
 
 .newTodo {
