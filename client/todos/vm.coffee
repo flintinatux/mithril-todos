@@ -38,9 +38,6 @@ vm.init = ->
     m.redraw.strategy 'all'
     m.redraw true
 
-  vm.sortedList = ->
-    _.sortBy vm.list, (todo) -> todo.done()
-
   vm.toggleAll = ->
     done = not vm.allDone()
     _.each vm.list, (todo) ->
