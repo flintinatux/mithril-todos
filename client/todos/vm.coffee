@@ -30,7 +30,7 @@ vm.init = ->
 
   vm.remove = (removed, e) ->
     e.stopPropagation()
-    _.remove vm.list, (todo) -> todo is removed
+    vm.list.splice vm.list.indexOf(removed), 1
 
   vm.sortedList = ->
     _.sortBy vm.list, (todo) -> todo.done()

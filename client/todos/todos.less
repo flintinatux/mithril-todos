@@ -1,33 +1,55 @@
-#todos {
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+// mixins
 
-.action {
+.action() {
   background: fade(white, 0);
   border: none;
-  bottom: 0;
   cursor: pointer;
   color: @gray-50;
-  padding: 1.5rem 1.8rem;
-  position: absolute;
-  top: 0;
-  width: 5.0rem;
+  flex-shrink: 0;
+  padding: 1.8rem 0.9rem;
+  width: 3.2rem;
+
+  &:first-child {
+    padding-left: 1.8rem;
+    width: 4.1rem;
+  }
 
   &:hover {
     color: @gray-10;
   }
+
+  &:last-child {
+    padding-right: 1.8rem;
+    width: 4.1rem;
+  }
 }
 
-.clear {
-  right: 0;
+.listItem() {
+  display: flex;
+  line-height: 1.0;
+  margin: 0;
+  padding: 0;
+}
 
-  .fa:before {
-    content: @fa-var-remove;
+// styles
+
+#todos {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.clear,
+.remove {
+  .action();
+  font-style: normal;
+
+  &:before {
+    content: '\00d7';
   }
 }
 
@@ -37,6 +59,9 @@
 }
 
 .description {
+  flex-grow: 2;
+  line-height: normal;
+  padding: 1.5rem 0.9rem;
   word-wrap: break-word;
 
   .done & {
@@ -48,28 +73,40 @@
   flex-shrink: 0;
 }
 
-.newTodo {
-  margin: 0;
-  position: relative;
+.menu,
+.reorder {
+  .action();
+  .fa();
 
-  #description {
-    border: none;
-    margin: 0;
-    padding: 1.5rem 5.0rem;
-    width: 100%;
+  &:before {
+    content: @fa-var-reorder;
   }
 }
 
-.remove {
-  right: 0;
+.newTodo {
+  .listItem();
+  background: white;
+
+  #description {
+    background: fade(white, 0);
+    border: none;
+    flex-grow: 2;
+    margin: 0;
+    padding: 1.5rem 0.9rem;
+  }
+}
+
+.reorder {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .status {
+  .action();
   .fa();
-  left: 0;
-  padding: 1.8rem;
-  position: absolute;
-  top: 0;
 
   &:before {
     content: @fa-var-square-o;
@@ -87,10 +124,8 @@
 }
 
 .todo {
+  .listItem();
   border-bottom: 1px solid @gray-80;
-  cursor: pointer;
-  padding: 1.5rem 5.0rem;
-  position: relative;
 
   &:hover {
     background: @gray-80;
@@ -108,13 +143,14 @@
 }
 
 .toggleAll {
-  left: 0;
+  .action();
+  .fa();
 
-  .fa:before {
+  &:before {
     content: @fa-var-square-o;
   }
 
-  .fa.allDone:before {
+  &.allDone:before {
     content: @fa-var-check-square-o;
   }
 }
