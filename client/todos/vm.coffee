@@ -32,6 +32,12 @@ vm.init = ->
     e.stopPropagation()
     vm.list.splice vm.list.indexOf(removed), 1
 
+  vm.reorder = (e) ->
+    todo = vm.list.splice(e.oldIndex, 1)[0]
+    vm.list.splice e.newIndex, 0, todo
+    m.redraw.strategy 'all'
+    m.redraw true
+
   vm.sortedList = ->
     _.sortBy vm.list, (todo) -> todo.done()
 

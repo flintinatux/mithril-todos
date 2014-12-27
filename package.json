@@ -38,6 +38,7 @@
     "minifyify": "^4.4.0",
     "mithril": "^0.1.27",
     "pm2": "^0.12.2",
+    "sortablejs": "^1.0.0",
     "uuid": "^2.0.1"
   },
   "devDependencies": {

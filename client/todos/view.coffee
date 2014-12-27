@@ -1,5 +1,6 @@
 _    = require 'lodash'
 m    = require 'mithril'
+sort = require 'sortablejs'
 util = require '../common/util'
 
 module.exports = (vm) ->
@@ -25,8 +26,14 @@ module.exports = (vm) ->
     ]
 
     m 'section.content.container', [
-      m 'ul.todos', [
-        vm.sortedList().map (todo) ->
+      m 'ul.todos',
+        config: (el, isInitialized, context) ->
+          return if isInitialized
+          new sort el,
+            animation: 150
+            handle: '.reorder'
+            onEnd: vm.reorder
+      , vm.list.map (todo) ->
           m 'li.todo',
             class: if todo.done() then 'done' else ''
           , [
@@ -40,6 +47,5 @@ module.exports = (vm) ->
             m 'i.remove[title=Remove]',
               onclick: _.partial vm.remove, todo
           ]
-      ]
     ]
   ]

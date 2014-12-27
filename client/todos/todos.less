@@ -7,6 +7,7 @@
   color: @gray-50;
   flex-shrink: 0;
   padding: 1.8rem 0.9rem;
+  text-align: center;
   width: 3.2rem;
 
   &:first-child {
@@ -73,13 +74,12 @@
   flex-shrink: 0;
 }
 
-.menu,
-.reorder {
+.menu {
   .action();
   .fa();
 
   &:before {
-    content: @fa-var-reorder;
+    content: @fa-var-ellipsis-v;
   }
 }
 
@@ -97,16 +97,23 @@
 }
 
 .reorder {
+  .action();
+  .fa();
   cursor: grab;
 
   &:active {
     cursor: grabbing;
+  }
+
+  &:before {
+    content: @fa-var-reorder;
   }
 }
 
 .status {
   .action();
   .fa();
+  text-align: left;
 
   &:before {
     content: @fa-var-square-o;
@@ -145,6 +152,7 @@
 .toggleAll {
   .action();
   .fa();
+  text-align: left;
 
   &:before {
     content: @fa-var-square-o;
