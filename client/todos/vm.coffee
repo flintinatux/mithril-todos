@@ -1,5 +1,5 @@
 _     = require 'lodash'
-m     = require '../lib/mithril'
+m     = require 'mithril'
 Todo  = require './model'
 Todos = require './collection'
 

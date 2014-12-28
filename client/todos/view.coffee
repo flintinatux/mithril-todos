@@ -1,5 +1,5 @@
 _    = require 'lodash'
-m    = require '../lib/mithril'
+m    = require 'mithril'
 sort = require 'sortablejs'
 
 module.exports = (vm) ->

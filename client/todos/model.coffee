@@ -1,4 +1,4 @@
-m    = require '../lib/mithril'
+m    = require 'mithril'
 uuid = require 'uuid'
 
 Todo = (data={}) ->
