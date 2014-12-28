@@ -1,7 +1,7 @@
-m    = require 'mithril'
+m    = require '../lib/mithril'
 uuid = require 'uuid'
 
-Todo = (data) ->
+Todo = (data={}) ->
   @id          = m.prop uuid.v4()
   @description = m.prop data.description
   @done        = m.prop false

@@ -6,12 +6,13 @@
   cursor: pointer;
   color: @gray-50;
   flex-shrink: 0;
-  padding: 1.8rem 0.9rem;
+  line-height: 1.0;
+  padding: @padding-h (@padding-h / 2);
   text-align: center;
   width: 3.2rem;
 
   &:first-child {
-    padding-left: 1.8rem;
+    padding-left: @padding-h;
     width: 4.1rem;
   }
 
@@ -20,16 +21,28 @@
   }
 
   &:last-child {
-    padding-right: 1.8rem;
+    padding-right: @padding-h;
     width: 4.1rem;
+  }
+}
+
+.hoverable() {
+  &:hover {
+    background: @gray-80;
   }
 }
 
 .listItem() {
   display: flex;
-  line-height: 1.0;
   margin: 0;
   padding: 0;
+}
+
+.menuItem() {
+  .hoverable();
+  border-right: 1px solid @gray-80;
+  cursor: pointer;
+  padding: @padding-v @padding-h;
 }
 
 // styles
@@ -54,6 +67,11 @@
   }
 }
 
+.clearCompleted,
+.clearAll {
+  .menuItem();
+}
+
 .content {
   flex-grow: 2;
   overflow-y: auto;
@@ -61,8 +79,7 @@
 
 .description {
   flex-grow: 2;
-  line-height: normal;
-  padding: 1.5rem 0.9rem;
+  padding: @padding-v (@padding-h / 2);
   word-wrap: break-word;
 
   .done & {
@@ -75,11 +92,15 @@
 }
 
 .menu {
-  .action();
-  .fa();
+  .listItem();
+  height: 0;
+  overflow-y: hidden;
+  text-align: center;
+  transition: height 150ms ease-in;
 
-  &:before {
-    content: @fa-var-ellipsis-v;
+  &.shown {
+    border-bottom: 1px solid @gray-80;
+    height: @listItem-height;
   }
 }
 
@@ -92,7 +113,7 @@
     border: none;
     flex-grow: 2;
     margin: 0;
-    padding: 1.5rem 0.9rem;
+    padding: @padding-v (@padding-h / 2);
   }
 }
 
@@ -125,18 +146,19 @@
 }
 
 .title {
-  margin: 1.5rem 0;
+  margin: @padding-v 0;
   text-align: center;
   text-transform: uppercase;
 }
 
 .todo {
+  .hoverable();
   .listItem();
   border-bottom: 1px solid @gray-80;
 
-  &:hover {
-    background: @gray-80;
-  }
+  // &:hover {
+  //   background: @gray-80;
+  // }
 
   &.done {
     color: @gray-50;
@@ -160,5 +182,14 @@
 
   &.allDone:before {
     content: @fa-var-check-square-o;
+  }
+}
+
+.toggleMenu {
+  .action();
+  .fa();
+
+  &:before {
+    content: @fa-var-ellipsis-v;
   }
 }

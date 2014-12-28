@@ -1,7 +1,6 @@
 _    = require 'lodash'
-m    = require 'mithril'
+m    = require '../lib/mithril'
 sort = require 'sortablejs'
-util = require '../common/util'
 
 module.exports = (vm) ->
   m '#todos', [
@@ -9,7 +8,8 @@ module.exports = (vm) ->
       m 'h1.title', 'Todo List'
 
       m 'form.newTodo', { onsubmit: vm.add }, [
-        m 'i.menu[title=Menu]'
+        m 'i.toggleMenu[title=Menu]',
+          onclick: vm.menuShown.toggle
 
         m "i.toggleAll[title='Toggle all']",
           class:   if vm.allDone() then 'allDone' else ''
@@ -22,6 +22,18 @@ module.exports = (vm) ->
         m "i.clear[title=Clear]",
           class: if vm.description() then '' else 'hidden'
           onclick: vm.clear
+      ]
+
+      m 'nav.menu',
+        class: if vm.menuShown() then 'shown' else ''
+      , [
+        m 'span.clearCompleted',
+          onclick: vm.clearCompleted
+        , 'Clear completed'
+
+        m 'span.clearAll',
+          onclick: vm.clearAll
+        , 'Clear all'
       ]
     ]
 
@@ -40,7 +52,7 @@ module.exports = (vm) ->
             m 'i.reorder[title=Reorder]'
 
             m 'i.status[title=Done]',
-              onclick: util.toggle todo, 'done'
+              onclick: todo.done.toggle
 
             m 'span.description', todo.description()
 

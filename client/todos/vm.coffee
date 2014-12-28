@@ -1,18 +1,20 @@
 _     = require 'lodash'
-m     = require 'mithril'
+m     = require '../lib/mithril'
 Todo  = require './model'
 Todos = require './collection'
 
 vm = {}
 
 vm.init = ->
+  vm.description = m.prop ''
+
   vm.list = new Todos(
     new Todo description: 'Go to the bank'
     new Todo description: 'Walk the dog after lunch'
     new Todo description: 'Ship all the things'
   )
 
-  vm.description = m.prop ''
+  vm.menuShown = m.prop false
 
   vm.add = (e) ->
     e.preventDefault()
@@ -27,6 +29,12 @@ vm.init = ->
   vm.clear = ->
     vm.description ''
     document.getElementById('description').focus()
+
+  vm.clearAll = ->
+    vm.list = []
+
+  vm.clearCompleted = ->
+    vm.list = _.reject vm.list, (todo) -> todo.done()
 
   vm.remove = (removed, e) ->
     e.stopPropagation()
