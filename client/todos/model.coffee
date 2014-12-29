@@ -2,9 +2,11 @@ m    = require 'mithril'
 uuid = require 'uuid'
 
 Todo = (data={}) ->
-  @id          = m.prop uuid.v4()
-  @description = m.prop data.description
-  @done        = m.prop false
-  return
+  data.id   ?= uuid.v4()
+  data.done ?= false
+
+  id:          m.prop data.id
+  description: m.prop data.description
+  done:        m.prop data.done
 
 module.exports = Todo

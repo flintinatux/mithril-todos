@@ -45,7 +45,7 @@ module.exports = (vm) ->
             animation: 150
             handle: '.reorder'
             onEnd: vm.reorder
-      , vm.list.map (todo) ->
+      , vm.list().map (todo) ->
           m 'li.todo',
             class: if todo.done() then 'done' else ''
           , [
