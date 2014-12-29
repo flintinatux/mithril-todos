@@ -6,10 +6,6 @@ localforage.setDriver [localforage.WEBSQL, localforage.LOCALSTORAGE]
 Collection = (name) ->
   c = m.prop []
 
-  c.add = (data) ->
-    c().unshift new c.model() data
-    c
-
   c.clear = ->
     c []
     c
@@ -37,6 +33,11 @@ Collection = (name) ->
   c.save = ->
     localforage.setItem(name, c()).catch (err) ->
       console.log err
+
+  ['push', 'unshift'].forEach (method) ->
+    c[method] = (data) ->
+      c()[method] new c.model() data
+      c
 
   c
 

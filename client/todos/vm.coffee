@@ -14,7 +14,7 @@ vm.init = ->
   vm.add = (e) ->
     e.preventDefault()
     if vm.description()
-      vm.list.add(description: vm.description()).save()
+      vm.list.unshift(description: vm.description()).save()
       vm.clear()
 
   vm.allDone = ->
