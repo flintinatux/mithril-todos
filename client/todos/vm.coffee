@@ -39,7 +39,6 @@ vm.init = ->
     todo = vm.list().splice(e.oldIndex, 1)[0]
     vm.list().splice e.newIndex, 0, todo
     vm.list.save()
-    m.redraw.strategy 'all'
     m.redraw()
 
   vm.toggleAll = ->

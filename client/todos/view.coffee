@@ -47,6 +47,7 @@ module.exports = (vm) ->
             onEnd: vm.reorder
       , vm.list().map (todo) ->
           m 'li.todo',
+            id: "todo-#{todo.id()}"
             class: if todo.done() then 'done' else ''
           , [
             m 'i.reorder[title=Reorder]'
