@@ -27,10 +27,12 @@ vm.init = ->
 
   vm.clearAll = ->
     vm.list.clear().save()
+    vm.menuShown false
 
   vm.clearCompleted = ->
     vm.list _.reject(vm.list(), done)
     vm.list.save()
+    vm.menuShown false
 
   vm.remove = (model) ->
     vm.list.remove(model).save()

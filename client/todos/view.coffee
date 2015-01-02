@@ -1,6 +1,6 @@
-_    = require 'lodash'
-m    = require 'mithril'
-sort = require 'sortablejs'
+_ = require 'lodash'
+m = require 'mithril'
+Sortable = require 'sortablejs'
 
 module.exports = (vm) ->
   m '#todos', [
@@ -38,27 +38,31 @@ module.exports = (vm) ->
     ]
 
     m 'section.content.container', [
-      m 'ul.todos',
-        config: (el, isInitialized, context) ->
-          return if isInitialized
-          new sort el,
-            animation: 150
-            handle: '.reorder'
-            onEnd: vm.reorder
-      , vm.list().map (todo) ->
-          m 'li.todo',
-            id: "todo-#{todo.id()}"
-            class: if todo.done() then 'done' else ''
-          , [
-            m 'i.reorder[title=Reorder]'
+      if not vm.list().length
+        m 'p.none', 'No todos found. Please add one above!'
+      else
+        m 'ul.todos',
+          config: (el, isInit, context) ->
+            return if isInit
+            sortable = new Sortable el,
+              animation: 150
+              handle: '.reorder'
+              onEnd: vm.reorder
+            context.onunload = -> sortable.destroy()
+        , vm.list().map (todo) ->
+            m 'li.todo',
+              id: "todo-#{todo.id()}"
+              class: if todo.done() then 'done' else ''
+            , [
+              m 'i.reorder[title=Reorder]'
 
-            m 'i.status[title=Done]',
-              onclick: todo.done.toggle
+              m 'i.status[title=Done]',
+                onclick: todo.done.toggle
 
-            m 'span.description', todo.description()
+              m 'span.description', todo.description()
 
-            m 'i.remove[title=Remove]',
-              onclick: _.partial vm.remove, todo
-          ]
+              m 'i.remove[title=Remove]',
+                onclick: _.partial vm.remove, todo
+            ]
     ]
   ]
